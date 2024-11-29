@@ -1,0 +1,261 @@
+basePath: /api
+definitions:
+  models.AddSongRequest:
+    properties:
+      group:
+        type: string
+      song:
+        type: string
+    type: object
+  models.AddSongResponse:
+    properties:
+      id:
+        type: string
+    type: object
+  models.Song:
+    properties:
+      group:
+        type: string
+      id:
+        type: string
+      link:
+        type: string
+      releaseDate:
+        type: string
+      text:
+        type: string
+      title:
+        type: string
+    type: object
+  models.SongLyricsResponse:
+    properties:
+      lyrics:
+        type: string
+    type: object
+  models.UpdateSongRequest:
+    properties:
+      group:
+        type: string
+      link:
+        type: string
+      releaseDate:
+        example: yyyy-mm-dd
+        type: string
+      text:
+        type: string
+      title:
+        type: string
+    type: object
+  utils.ErrorResponse:
+    properties:
+      message:
+        type: string
+    type: object
+  utils.StatusResponse:
+    properties:
+      status:
+        type: string
+    type: object
+host: localhost:81
+info:
+  contact: {}
+  description: Music API that allows you to add, get, update and delete songs
+  title: Music API
+  version: "1.0"
+paths:
+  /songs:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve songs from the database based on the provided filters
+      parameters:
+      - description: Group name
+        in: query
+        name: group
+        type: string
+      - description: Song title
+        in: query
+        name: title
+        type: string
+      - description: Release date (YYYY-MM-DD)
+        in: query
+        name: releaseDate
+        type: string
+      - description: Text
+        in: query
+        name: text
+        type: string
+      - description: Link
+        in: query
+        name: link
+        type: string
+      - default: 1
+        description: Page number
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: Number of songs per page
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List of songs
+          schema:
+            items:
+              $ref: '#/definitions/models.Song'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+      summary: Get a list of songs
+      tags:
+      - songs
+    post:
+      consumes:
+      - application/json
+      description: Create a new song in the database with the provided details
+      parameters:
+      - description: Song Data
+        in: body
+        name: song
+        required: true
+        schema:
+          $ref: '#/definitions/models.AddSongRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: id of the created song
+          schema:
+            $ref: '#/definitions/models.AddSongResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+      summary: Create a new song
+      tags:
+      - songs
+  /songs/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a song from the system by its ID
+      parameters:
+      - description: Song ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Response indicating the status of the operation
+          schema:
+            $ref: '#/definitions/utils.StatusResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+      summary: Delete a song
+      tags:
+      - songs
+    put:
+      consumes:
+      - application/json
+      description: Update the details of an existing song
+      parameters:
+      - description: Song ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Song Data
+        in: body
+        name: song
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateSongRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Response indicating the status of the operation
+          schema:
+            $ref: '#/definitions/utils.StatusResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+      summary: Update an existing song
+      tags:
+      - songs
+  /songs/{songId}/lyrics:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve lyrics for a song by its ID based on the provided filters
+      parameters:
+      - description: Song ID
+        in: path
+        name: songId
+        required: true
+        type: string
+      - default: 1
+        description: Page number
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: Number of couplets per page
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Song lyrics
+          schema:
+            $ref: '#/definitions/models.SongLyricsResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+      summary: Get lyrics for a specific song
+      tags:
+      - songs
+swagger: "2.0"

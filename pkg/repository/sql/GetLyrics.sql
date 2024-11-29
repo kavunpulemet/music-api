@@ -1,0 +1,1 @@
+SELECT text FROM songs WHERE id = $1
