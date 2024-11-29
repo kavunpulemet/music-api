@@ -11,9 +11,9 @@ import (
 
 	"effectiveMobileTest/config"
 	"effectiveMobileTest/pkg/api"
-	"effectiveMobileTest/pkg/api/utils"
 	"effectiveMobileTest/pkg/repository"
 	"effectiveMobileTest/pkg/service/music"
+	"effectiveMobileTest/utils"
 )
 
 type App struct {

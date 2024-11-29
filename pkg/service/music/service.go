@@ -12,9 +12,9 @@ import (
 	"github.com/google/uuid"
 
 	"effectiveMobileTest/models"
-	"effectiveMobileTest/pkg/api/utils"
 	"effectiveMobileTest/pkg/repository"
 	"effectiveMobileTest/pkg/service/mappers"
+	"effectiveMobileTest/utils"
 )
 
 type MusicService interface {

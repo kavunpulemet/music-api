@@ -11,7 +11,7 @@ import (
 
 	"effectiveMobileTest/config"
 	_ "effectiveMobileTest/docs"
-	"effectiveMobileTest/pkg/api/utils"
+	"effectiveMobileTest/utils"
 )
 
 // @title Music API

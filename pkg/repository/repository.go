@@ -9,8 +9,8 @@ import (
 	"github.com/jmoiron/sqlx"
 
 	"database/sql"
-	"effectiveMobileTest/pkg/api/utils"
 	dbmodels "effectiveMobileTest/pkg/repository/models"
+	"effectiveMobileTest/utils"
 )
 
 type Repository interface {

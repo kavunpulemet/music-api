@@ -9,8 +9,8 @@ import (
 	"github.com/gorilla/mux"
 
 	"effectiveMobileTest/models"
-	"effectiveMobileTest/pkg/api/utils"
 	"effectiveMobileTest/pkg/service/music"
+	"effectiveMobileTest/utils"
 )
 
 // AddSong godoc

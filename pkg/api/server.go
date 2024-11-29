@@ -11,8 +11,8 @@ import (
 	"effectiveMobileTest/config"
 	"effectiveMobileTest/pkg/api/handler"
 	"effectiveMobileTest/pkg/api/middlewares"
-	"effectiveMobileTest/pkg/api/utils"
 	"effectiveMobileTest/pkg/service/music"
+	"effectiveMobileTest/utils"
 )
 
 const (

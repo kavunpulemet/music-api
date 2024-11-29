@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"runtime/debug"
 
-	"effectiveMobileTest/pkg/api/utils"
+	"effectiveMobileTest/utils"
 )
 
 func RecoveryMiddleware(ctx utils.MyContext, next http.Handler) http.Handler {
